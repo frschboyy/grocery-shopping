@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Shopping</string>
+    <string name="milk">MILK</string>
+    <string name="watch">WATCH</string>
+    <string name="pen">PEN</string>
+    <string name="bread">BREAD</string>
+    <string name="item">Item</string>
+    <string name="unit_price">Unit Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="grand_total">Grand Total</string>
+    <string name="up1">...</string>
+    <string name="up2">...</string>
+    <string name="up3">...</string>
+    <string name="up4">...</string>
+    <string name="q1">...</string>
+    <string name="q2">...</string>
+    <string name="q3">...</string>
+    <string name="q4">...</string>
+    <string name="gt1">...</string>
+    <string name="gt2">...</string>
+    <string name="gt3">...</string>
+    <string name="gt4">...</string>
+    <string name="grand_Total">GRAND TOTAL</string>
+    <string name="GT">...</string>
+    <string name="discount_15">Discount 15%</string>
+    <string name="discount15">DISCOUNT 15%</string>
+    <string name="net_pay">NET PAY</string>
+    <string name="D">...</string>
+    <string name="NP">...</string>
+    <string name="GrandT">0.0</string>
+    <string name="D15">0.0</string>
+    <string name="Np">0.0</string>
+</resources>
