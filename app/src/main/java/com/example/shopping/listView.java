@@ -7,18 +7,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.util.*;
+
 
 public class listView extends AppCompatActivity {
     private Button cart, recycle, buff;
     private ListView list;
-    private ArrayList<String> receiveData;
+    private HashMap<String,String> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,24 @@ public class listView extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
 
         list = findViewById(R.id.receipt_data);
-        receiveData = getIntent().getStringArrayListExtra("cart");
+        Intent intent = getIntent();
+        data = (HashMap<String, String>) intent.getSerializableExtra("cart");
 
-        if (receiveData != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, receiveData);
-            list.setAdapter(adapter);
+        ArrayList<String> myList = new ArrayList<>();
+        if (data != null){
+            for(Map.Entry<String,String> entry : data.entrySet()){
+                if(!entry.getValue().isEmpty()){
+                    if(entry.getValue().equals("RECEIPT!"))
+                        myList.add(entry.getKey() + entry.getValue());
+                    else
+                        myList.add(entry.getKey() + " - $" + entry.getValue());
+                }
+            }
         }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myList);
+        list.setAdapter(adapter);
+
 
         cart = findViewById(R.id.toCart);
         recycle = findViewById(R.id.toRecycleView);
@@ -48,7 +60,10 @@ public class listView extends AppCompatActivity {
         recycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(listView.this, recycleView.class);
+                Intent intent = new Intent(listView.this, recView.class);
+                HashMap<String,String> data2 = data;
+                data2.remove(" ");
+                intent.putExtra("cart",new HashMap<>(data2));
                 startActivity(intent);
             }
         });
@@ -57,6 +72,7 @@ public class listView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(listView.this, buffStream.class);
+                intent.putExtra("cart", new HashMap<>(data));
                 startActivity(intent);
             }
         });
